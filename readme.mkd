@@ -1,5 +1,13 @@
 
 
+## yelp-recsys-2013
+主要是为这个挑战赛 而写的代码
+
+train/ 目录下放训练数据
+test/ 目录下方测试数据 
+
+为了节省空间 不上传 https://www.kaggle.com/c/yelp-recsys-2013/data  可以下到
+
 
 ###数据背景了解
 大概是要对预测 他给定的 userid  --》 busenessid 的评分
