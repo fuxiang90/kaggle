@@ -14,10 +14,27 @@ class TestBusinessData(object):
         self.name = business_dict['name']
         self.neighborhoods = business_dict['neighborhoods']
         self.longitude = business_dict['longitude']
-#         self.stars = business_dict['stars']
+        self.stars = 0.0
         self.latitude = business_dict['latitude']
         self.type = business_dict['type']
         self.review_count = business_dict['review_count']
+        
+        self.checkin_vec = [ [ 0 for j in range(24) ] for i in range(7) ]   
+        
+    def get_checkin_data(self,checkin_info_dict): 
+        
+        for each in checkin_info_dict.keys():
+            len_each = len(each)
+            if len_each == 3 :
+                hour = int(each[:1])
+            elif len_each == 4:
+                hour = int(each[:2])
+            
+            weekday = int(each[len_each-1:])            
+            count = checkin_info_dict[each]          
+            
+            self.checkin_vec[weekday][hour] = count
+                
         
 
 class TestUserData(object):
@@ -50,7 +67,17 @@ def get_test_user(filename ,test_user_dict):
 
         
     return test_user_dict
+
+def get_test_checkin(filename ,g_business_dict):  
+    fin = open(filename)
     
+    for each in fin:
+
+        checkin_dict = json.loads(each)
+
+        g_business_dict[ checkin_dict['business_id'] ].get_checkin_data(checkin_dict['checkin_info'])
+        
+    return checkin_dict  
 def main():
     
     test_business_dict = {}

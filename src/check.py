@@ -50,8 +50,43 @@ def main():
     print train_count 
     print '\n'
     print  train_len
+    
+
+def check_categories():
+    
+    train_business_dict = {}
+    train_input.get_business(config.train_business, train_business_dict)     
+    train_input.get_checkin(config.train_checkin, train_business_dict)
+    
+    test_business_dict = {}
+    test_input.get_test_business(config.test_business, test_business_dict)
+    test_input.get_test_checkin(config.test_checkin ,test_business_dict)
+    
+    categories_dict = {}
+    for each in train_business_dict.keys():
+        
+        categories_list =  train_business_dict[each].categories 
+        
+        for each_categories in categories_list:
+            if each_categories not in categories_dict :
+                categories_dict[each_categories] = len(categories_dict.keys()) + 1
+    
+    
+    for each in train_business_dict.keys():
+        
+        categories_list =  train_business_dict[each].categories 
+        
+        for each_categories in categories_list:
+            if each_categories not in categories_dict :
+               print "test" + each_categories
+    
+    
+    print len (categories_dict.keys())
+    
+    
 
 if __name__ == '__main__':
 
-    main()
+#     main()
+    check_categories()
     print 'done it'

@@ -13,5 +13,6 @@ test_user = '../test/yelp_test_set_user.json'
 
 test_business = '../test/yelp_test_set_business.json'
 
+test_checkin  = '../test/yelp_test_set_checkin.json'
 
-
+test_review = '../test/yelp_test_set_review.json'
