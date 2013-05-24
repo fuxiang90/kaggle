@@ -21,9 +21,12 @@ class BusinessData(object):
         self.type = business_dict['type']
         self.review_count = business_dict['review_count']
         
+        
+        
         self.checkin_vec = [ [ 0 for j in range(24) ] for i in range(7) ]    
-    
-    def get_checkin_data(self,checkin_info_dict): 
+        
+        self.cluster = 0
+    def set_checkin_data(self,checkin_info_dict): 
         
         for each in checkin_info_dict.keys():
             len_each = len(each)
@@ -38,6 +41,9 @@ class BusinessData(object):
             
             
             self.checkin_vec[weekday][hour] = count
+        
+    def get_chink_info_vec(self):
+        return self.checkin_vec
                 
                 
 
@@ -82,7 +88,7 @@ def get_checkin(filename ,g_business_dict):
 
         checkin_dict = json.loads(each)
 
-        g_business_dict[ checkin_dict['business_id'] ].get_checkin_data(checkin_dict['checkin_info'])
+        g_business_dict[ checkin_dict['business_id'] ].set_checkin_data(checkin_dict['checkin_info'])
         
     return checkin_dict
     
@@ -94,14 +100,16 @@ def get_review(filename ,g_review_dict):
     for each in fin:        
 
         review_dict = json.loads(each)
-        data = ReviewData(review_dict)
-        
+        data = ReviewData(review_dict)       
 
         g_review_dict[  review_dict['business_id'] ] = data
 
 
     return g_review_dict
-        
+
+def get_user(filename ,g_user_dic):
+    pass
+            
 def main():
     g_business_dict = {}
     get_business(config.train_business,g_business_dict)

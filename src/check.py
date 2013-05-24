@@ -83,10 +83,58 @@ def check_categories():
     
     print len (categories_dict.keys())
     
+
+# 检查 train 中 user 有多少个 在 test 的review 中出现过
+def check_review_user():
     
+    fin = open(config.test_review)
+    user_set = set()
+    for each in fin:
+        review_dict = json.loads(each)
+        user_set.add(review_dict['user_id'])
+    len_user_set = len(user_set)
+    
+    len_count = 0
+    train_review_dict = {}
+    train_input.get_review(config.train_review, train_review_dict)
+    
+    for each in train_review_dict.keys():
+        userid = train_review_dict[each].user_id
+        if userid in user_set:
+            len_count = len_count + 1
+    
+    print len_count 
+    print len_user_set
+        
+        
+    
+    
+# 检查 train 中 business 有多少个 在 test 的review 中出现过
+def check_review_business():
+    fin = open(config.test_review)
+    business_set = set()
+    for each in fin:
+        review_dict = json.loads(each)
+        business_set.add(review_dict['user_id'])
+    len_business_set = len(business_set)
+    
+    len_count = 0
+    train_review_dict = {}
+    train_input.get_review(config.train_review, train_review_dict)
+    
+    for each in train_review_dict.keys():
+        business_id = train_review_dict[each].business_id
+        if business_id in business_set:
+            len_count = len_count + 1
+    
+    print len_count 
+    print len_business_set
+    pass
 
 if __name__ == '__main__':
 
 #     main()
-    check_categories()
+#     check_categories()
+#     check_review_business()
+    check_review_user()
     print 'done it'
