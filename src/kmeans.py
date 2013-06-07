@@ -160,7 +160,7 @@ def main():
         
         check_vec = train_business_dict[each].checkin_vec
         
-        near_cluster = 0
+        near_cluster = -1
         min_dist = 100000000
         for each_mean in  range(0,100):
             
